@@ -1,0 +1,36 @@
+name: containerlab-topology
+prefix: p2p
+topology:
+  nodes:
+    sender:
+      kind: linux
+      image: p2p-image
+      group: sender
+    peer1:
+      kind: linux
+      image: p2p-image
+      group: peer
+    peer2:
+      kind: linux
+      image: p2p-image
+      group: peer
+    peer3:
+      kind: linux
+      image: p2p-image
+      group: peer
+    peer4:
+      kind: linux
+      image: p2p-image
+      group: peer
+    peer5:
+      kind: linux
+      image: p2p-image
+      group: peer
+
+  links:
+    - endpoints: ["sender:eth1", "peer1:eth1"]
+    - endpoints: ["sender:eth2", "peer2:eth1"]
+    - endpoints: ["sender:eth3", "peer3:eth1"]
+    - endpoints: ["sender:eth4", "peer4:eth1"]
+    - endpoints: ["sender:eth5", "peer5:eth1"]
+
