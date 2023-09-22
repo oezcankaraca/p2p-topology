@@ -5,13 +5,9 @@ PEERS=("clab-containerlab-topology-peer1" "clab-containerlab-topology-peer2")
 
 # Network simulation for each peer
 for PEER in "${PEERS[@]}"; do
+    echo ""
     echo "Simulating network conditions for $PEER:"
     
-    # Display the tc configuration
-    echo ""
-    echo "Initial tc configurations for eth1 of $PEER:"
-    sudo docker exec -it $PEER tc qdisc show dev eth1
-
     # Check and delete existing tc rules, if present
     if sudo docker exec -it $PEER tc qdisc show dev eth1 | grep -q "handle 1:"; then
         sudo docker exec -it $PEER tc qdisc del dev eth1 root

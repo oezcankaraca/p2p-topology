@@ -1,21 +1,14 @@
-# Name of the containerlab topology
 name: containerlab-topology
+prefix: p2p
 
-# Define the topology components
 topology:
 
-  # List of nodes in the topology
   nodes:
 
     # Configuration for the first peer node
     peer1:
-      # Specify the node type
       kind: linux
-      
-      # Specify the Docker image for the node
       image: p2p-topology
-      
-      # Group the node logically
       group: Peers
       
       # Bind local scripts or files to the container's filesystem
@@ -24,18 +17,18 @@ topology:
       
       # Commands to execute upon node startup
       exec:
-        - echo "Setting for peer1"
         - echo "Waiting for 5 seconds..."
         - sleep 5
-        - echo "Executing tcWithClab.sh"
-        
-        # Make sure the script is executable
-        - chmod +x /tcWithClab.sh
-        
-        # Execute the script and save its output to a file
-        - sh /tcWithClab.sh > tcWithClab.txt 2>&1
+        - echo ""
+        - echo "Before tc configurations for eth1"
+        - tc qdisc show dev eth1
+        - echo ""
+        - echo "Executing tcWithClab.sh"  
+        - echo "Simulating network conditions for peer1"
+        - chmod +x /tcWithClab.sh  # Make sure the script is executable
+        - sh /tcWithClab.sh > tcWithClab.txt 2>&1  # Execute the script and save its output to a file
 
-    # Configuration for the second peer node (similar to the first one)
+    # Configuration for the second peer node
     peer2:
       kind: linux
       image: p2p-topology
@@ -43,15 +36,18 @@ topology:
       binds:
         - /home/ozcankaraca/Desktop/containerlab/p2p-topology/tcWithClab.sh:/tcWithClab.sh
       exec:
-        - echo "Setting for peer2"
         - echo "Waiting for 5 seconds..."
         - sleep 5
+        - echo ""
+        - echo "Before tc configurations for eth1"
+        - tc qdisc show dev eth1
+        - echo ""
         - echo "Executing tcWithClab.sh"
+        - echo "Simulating network conditions for peer2"
         - chmod +x /tcWithClab.sh
         - sh /tcWithClab.sh > tcWithClab.txt 2>&1
 
   # Define the network links between nodes
   links:
-    # Connect peer1 and peer2 using their eth1 interfaces
-    - endpoints: ["peer1:eth1", "peer2:eth1"]
+    - endpoints: ["peer1:eth1", "peer2:eth1"] # Connect peer1 and peer2 using their eth1 interfaces
 

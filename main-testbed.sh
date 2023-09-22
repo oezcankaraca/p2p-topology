@@ -13,9 +13,11 @@ echo "8) Exit without action"
 read -p "Enter the number of your choice: " choice
 
 case $choice in
-    1)
+    1)	
+    	echo ""
         # Deploy using Containerlab
         echo "Deploying with Containerlab..."
+        echo ""
         sudo containerlab deploy -t containerlab-topology.yml
         echo "Deployment completed."
         ;;
