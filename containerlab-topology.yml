@@ -1,6 +1,9 @@
 # Name of the containerlab topology
 name: containerlab-topology
 
+# Prefix of the containerlab topology
+prefix: p2p
+
 # Define the topology components
 topology:
 
@@ -13,7 +16,7 @@ topology:
       kind: linux
       
       # Specify the Docker image for the node
-      image: p2p-image
+      image: p2p-topology
       
       # Group the node logically
       group: Peers
@@ -38,7 +41,7 @@ topology:
     # Configuration for the second peer node (similar to the first one)
     peer2:
       kind: linux
-      image: p2p-image
+      image: p2p-topology
       group: Peers
       binds:
         - /home/ozcankaraca/Desktop/containerlab/p2p-topology/tcWithClab.sh:/tcWithClab.sh

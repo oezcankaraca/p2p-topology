@@ -28,7 +28,7 @@ case $choice in
     3)
         # Build Docker image from Dockerfile
         echo "Building Docker image from Dockerfile..."
-        sudo docker build -f dockerfile -t p2p-image .
+        sudo docker build -f dockerfile -t p2p-topology .
         echo "Docker image build completed."
         ;;
     4)
