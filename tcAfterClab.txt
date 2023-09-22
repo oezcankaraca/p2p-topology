@@ -1,0 +1,34 @@
+Simulating network conditions for clab-containerlab-topology-peer1:
+
+Initial tc configurations for eth1 of clab-containerlab-topology-peer1:
+qdisc noqueue 0: root refcnt 2 
+
+Setting up Token Bucket Filter (TBF) on eth1 of clab-containerlab-topology-peer1 to limit rate to 1Mbit, with a buffer of 32Kb and latency of 400ms...
+
+Introducing a delay of 100ms using Network Emulator (netem) on eth1 of clab-containerlab-topology-peer1...
+
+Simulating 10% packet loss using Network Emulator (netem) on eth1 of clab-containerlab-topology-peer1...
+
+Current tc configurations for eth1 of clab-containerlab-topology-peer1:
+qdisc tbf 1: root refcnt 5 rate 1Mbit burst 4Kb lat 400ms 
+qdisc netem 10: parent 1: limit 1000 delay 100ms
+qdisc netem 20: parent 10: limit 1000 loss 10%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Simulating network conditions for clab-containerlab-topology-peer2:
+
+Initial tc configurations for eth1 of clab-containerlab-topology-peer2:
+qdisc noqueue 0: root refcnt 2 
+
+Setting up Token Bucket Filter (TBF) on eth1 of clab-containerlab-topology-peer2 to limit rate to 1Mbit, with a buffer of 32Kb and latency of 400ms...
+
+Introducing a delay of 100ms using Network Emulator (netem) on eth1 of clab-containerlab-topology-peer2...
+
+Simulating 10% packet loss using Network Emulator (netem) on eth1 of clab-containerlab-topology-peer2...
+
+Current tc configurations for eth1 of clab-containerlab-topology-peer2:
+qdisc tbf 1: root refcnt 5 rate 1Mbit burst 4Kb lat 400ms 
+qdisc netem 10: parent 1: limit 1000 delay 100ms
+qdisc netem 20: parent 10: limit 1000 loss 10%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
