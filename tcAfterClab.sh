@@ -1,17 +1,22 @@
 #!/bin/bash
 
 # Variable definition
-PEERS=("clab-containerlab-topology-peer1" "clab-containerlab-topology-peer2")
+PEERS=("p2p-containerlab-topology-peer1" "p2p-containerlab-topology-peer2")
 
 # Network simulation for each peer
 for PEER in "${PEERS[@]}"; do
     echo ""
-    echo "Simulating network conditions for $PEER:"
+    echo "********** Simulating network conditions for $PEER: **********"
     
     # Check and delete existing tc rules, if present
     if sudo docker exec -it $PEER tc qdisc show dev eth1 | grep -q "handle 1:"; then
         sudo docker exec -it $PEER tc qdisc del dev eth1 root
     fi
+    
+    # Display the tc configuration (Before)
+    echo ""
+    echo "Old tc configurations for eth1"
+    sudo docker exec -it $PEER tc qdisc show dev eth1
 
     # Add Token Bucket Filter (TBF) qdisc on eth1
     echo ""
@@ -28,12 +33,12 @@ for PEER in "${PEERS[@]}"; do
     echo "Simulating 10% packet loss using Network Emulator (netem) on eth1 of $PEER..."
     sudo docker exec -it $PEER tc qdisc add dev eth1 parent 10: handle 20: netem loss 10%
 
-    # Display the tc configuration
+    # Display the tc configuration (After)
     echo ""
     echo "Current tc configurations for eth1 of $PEER:"
     sudo docker exec -it $PEER tc qdisc show dev eth1
     echo ""
-    echo "------------------------------------------------------------------------------------------------------------------------------------------------"
+    echo "----------------------------------------------------------------------------------------------------------------------------------"
 
     # Short pause to ensure all processes are complete
     sleep 2

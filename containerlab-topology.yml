@@ -26,7 +26,7 @@ topology:
         - echo "Executing tcWithClab.sh"  
         - echo "Simulating network conditions for peer1"
         - chmod +x /tcWithClab.sh  # Make sure the script is executable
-        - sh /tcWithClab.sh > tcWithClab.txt 2>&1  # Execute the script and save its output to a file
+        - ./tcWithClab.sh > tcWithClab.txt 2>&1  # Execute the script and save its output to a file
 
     # Configuration for the second peer node
     peer2:

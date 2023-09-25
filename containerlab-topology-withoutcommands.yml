@@ -1,0 +1,23 @@
+name: containerlab-topology
+prefix: p2p
+
+topology:
+
+  nodes:
+
+    # Configuration for the first peer node
+    peer1:
+      kind: linux
+      image: p2p-topology
+      group: Peers
+
+    # Configuration for the second peer node
+    peer2:
+      kind: linux
+      image: p2p-topology
+      group: Peers
+     
+  # Define the network links between nodes
+  links:
+    - endpoints: ["peer1:eth1", "peer2:eth1"] # Connect peer1 and peer2 using their eth1 interfaces
+
